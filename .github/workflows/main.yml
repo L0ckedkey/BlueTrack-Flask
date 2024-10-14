@@ -21,10 +21,7 @@ jobs:
 
       - name: Check out repository code
         uses: actions/checkout@v2
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2  # Upgraded to v2 to avoid save-state warnings
-
+        
       - name: Check and create Docker network if not exists
         run: |
           if ! sudo docker network inspect bluetrack-network >/dev/null 2>&1; then

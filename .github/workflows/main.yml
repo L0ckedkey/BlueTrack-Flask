@@ -1,0 +1,35 @@
+name: BlueTrack Backend NestJS
+on:
+  push:
+    branches:
+      - main  # Ubah sesuai dengan nama branch yang ingin diawasi
+  pull_request:
+    branches:
+      - main  # Ubah sesuai dengan nama branch yang ingin diawasi
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+jobs:
+  build:
+    # Menjalankan di runner lokal yang telah didaftarkan, misal 'my-local-runner'
+    runs-on: self-hosted  # Bisa gunakan label spesifik jika diperlukan seperti 'my-local-runner'
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Check and create Docker network if not exists
+        run: |
+          if ! docker network inspect bluetrack-network >/dev/null 2>&1; then
+            echo "Network bluetrack-network tidak ditemukan, membuat network..."
+            docker network create --driver bridge bluetrack-network
+          else
+            echo "Network bluetrack-network sudah ada."
+          fi
+      - name: Build and run Docker Compose
+        run: |
+          docker compose up -d 
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      - run: docker ps -a

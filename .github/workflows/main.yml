@@ -26,15 +26,15 @@ jobs:
         run: |
           if ! sudo docker network inspect bluetrack-network >/dev/null 2>&1; then
             echo "Network bluetrack-network not found, creating network..."
-            docker network create --driver bridge bluetrack-network
+            sudo docker network create --driver bridge bluetrack-network
           else
             echo "Network bluetrack-network already exists."
           fi
 
       - name: Build and run Docker Compose
         run: |
-          docker compose up -d 
+          sudo docker compose up -d 
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}  # Make sure this secret is set in GitHub secrets
 
-      - run: docker ps -a
+      - run: sudo docker ps -a

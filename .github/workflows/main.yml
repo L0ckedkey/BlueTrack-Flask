@@ -30,6 +30,9 @@ jobs:
           else
             echo "Network bluetrack-network already exists."
           fi
+      - name: Create .env file
+        run: |
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
           
       - name: Build and run Docker Compose
         run: |

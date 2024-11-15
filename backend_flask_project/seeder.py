@@ -3,7 +3,7 @@ from app import app
 from database.db import db
 from model.msroom import MsRoom
 from model.nodes import Nodes
-from model.msstudent import MsStudent
+from model.student import Student
 
 rooms = [
     "601", "602", "603", "604", "605", "606", "607", "608", "609", "610",
@@ -29,7 +29,7 @@ def seed_students_rooms_nodes():
         # delete previous
         MsRoom.query.delete()
         Nodes.query.delete()
-        MsStudent.query.delete()
+        Student.query.delete()
         # seed
         for i, room in enumerate(rooms, start=1):
             new_room = MsRoom(id=i, room_id=room)
@@ -41,7 +41,7 @@ def seed_students_rooms_nodes():
                 db.session.add(new_node)
         # students
         for i, student_nim in enumerate(students_nim, start=1):
-            new_student = MsStudent(id=i, student_nim=student_nim, is_registered=True)
+            new_student = Student(id=i, student_nim=student_nim, is_registered=True)
             db.session.add(new_student)
 
         db.session.commit()

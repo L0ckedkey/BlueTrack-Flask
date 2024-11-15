@@ -2,12 +2,12 @@
 from datetime import datetime
 from database.db import db
 
-class Transactions(db.Model):
-    __tablename__ = "transactions"
+class Transaction(db.Model):
+    __tablename__ = "transaction"
     
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    student_id = db.Column(db.Integer, db.ForeignKey('msstudent.id'), nullable=False)  # FK
-    room_id = db.Column(db.Integer, db.ForeignKey('msroom.id'), nullable=False)        # FK
+    student_id = db.Column(db.Integer,  nullable=False)  # FK
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id'), nullable=False)        # FK
     coordinate_x = db.Column(db.Float, nullable=True)
     coordinate_y = db.Column(db.Float, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)

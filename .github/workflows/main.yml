@@ -1,0 +1,43 @@
+name: BlueTrack Backend NestJS
+
+on:
+  push:
+    branches:
+      - main  # Change as needed for the branch you want to monitor
+  pull_request:
+    branches:
+      - main  # Change as needed for the branch you want to monitor
+
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+
+jobs:
+  build:
+    # Runs on a self-hosted runner, e.g., 'my-local-runner'
+    runs-on: self-hosted  # Use specific runner labels if needed like 'my-local-runner'
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+
+      - name: Check out repository code
+        uses: actions/checkout@v2
+        
+      - name: Check and create Docker network if not exists
+        run: |
+          if ! sudo docker network inspect bluetrack-network >/dev/null 2>&1; then
+            echo "Network bluetrack-network not found, creating network..."
+            sudo docker network create --driver bridge bluetrack-network
+          else
+            echo "Network bluetrack-network already exists."
+          fi
+      - name: Create .env file
+        run: |
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
+          
+      - name: Build and run Docker Compose
+        run: |
+          sudo docker compose up -d 
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}  # Make sure this secret is set in GitHub secrets
+
+      - run: sudo docker ps -a

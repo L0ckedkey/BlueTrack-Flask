@@ -1,8 +1,8 @@
 
 from app import app
 from database.db import db
-from model.msroom import MsRoom
-from model.nodes import Nodes
+from model.room import Room
+from model.node import Node
 from model.student import Student
 
 rooms = [
@@ -27,17 +27,17 @@ students_nim = [
 def seed_students_rooms_nodes():
     with app.app_context():
         # delete previous
-        MsRoom.query.delete()
-        Nodes.query.delete()
+        Room.query.delete()
+        Node.query.delete()
         Student.query.delete()
         # seed
         for i, room in enumerate(rooms, start=1):
-            new_room = MsRoom(id=i, room_id=room)
+            new_room = Room(id=i, room_id=room)
             db.session.add(new_room)
             # 4 ESP
             for esp_num in range(1, 5):
                 mac_address = mac_addresses[(i - 1) * 4 + (esp_num - 1)]
-                new_node = Nodes(id=(i - 1) * 4 + esp_num, room_id=i, mac_address=mac_address)
+                new_node = Node(id=(i - 1) * 4 + esp_num, room_id=i, mac_address=mac_address)
                 db.session.add(new_node)
         # students
         for i, student_nim in enumerate(students_nim, start=1):

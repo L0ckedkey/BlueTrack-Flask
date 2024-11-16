@@ -18,7 +18,7 @@ app.config.from_object(Config)
 db.init_app(app)
 # migrate = Migrate(app, db)
 
-# bp routes
+# bp routess
 app.register_blueprint(transaction_bp)
 app.register_blueprint(default_bp)
 

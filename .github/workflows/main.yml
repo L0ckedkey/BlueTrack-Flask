@@ -36,7 +36,7 @@ jobs:
           
       - name: Build and run Docker Compose
         run: |
-          sudo docker compose up -d 
+          sudo docker compose up -d --build
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}  # Make sure this secret is set in GitHub secrets
 

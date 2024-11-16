@@ -4,8 +4,8 @@ import joblib
 
 class PositionPredictor:
     def __init__(self):
-        self.model = keras.models.load_model('ann_model.h5')
-        self.scaler = joblib.load('MinMaxScaler.pkl')
+        self.model = keras.models.load_model('classification/ann_model.h5')
+        self.scaler = joblib.load('classification/MinMaxScaler.pkl')
 
     def predict_position(self, rssi_values):
         """

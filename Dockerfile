@@ -6,9 +6,12 @@ WORKDIR /app
 COPY requirements.txt .
 
 RUN pip install --upgrade pip
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
+    
 RUN pip install --no-cache-dir \
     numpy \
     scikit-learn \

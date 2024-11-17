@@ -6,8 +6,8 @@ services:
     container_name: bluetrack-backend-flask
     ports:
       - "5000:5000"
-    volumes:
-      - ./backend_flask_project:/app
+    #volumes:
+     # - ./backend_flask_project:/app
     environment:
       FLASK_APP: app.py
       FLASK_ENV: development

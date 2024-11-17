@@ -2,3 +2,5 @@ venv/
 
 .env
 
+new_requirements.txt
+

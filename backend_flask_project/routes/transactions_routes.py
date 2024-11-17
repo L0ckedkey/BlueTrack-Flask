@@ -48,7 +48,7 @@ def process_data():
             matches = set(mac_addresses).intersection(db_mac_addresses)
             if len(matches) >= 4:
                 matching_rows.append(row)
-                matching_mac_addresses = db_mac_addresses  # ordering/sorting
+                matching_mac_addresses = db_mac_addresses  # ordering/sortingg
                 room_id = row.room_id
                 ordered_rssi = []
                 for mac in matching_mac_addresses:

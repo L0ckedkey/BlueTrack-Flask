@@ -8,6 +8,7 @@ WORKDIR /app
 COPY new_requirements.txt .
 
 # Install dependencies dari requirements.txt
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r new_requirements.txt
 
 # Salin seluruh proyek ke dalam container

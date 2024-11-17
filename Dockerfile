@@ -8,7 +8,7 @@ WORKDIR /app
 COPY new-requirements.txt .
 
 # Install dependencies dari requirements.txt
-RUN pip install --no-cache-dir -r new-requirements.txt
+RUN pip install --no-cache-dir -r new_requirements.txt
 
 # Salin seluruh proyek ke dalam container
 COPY backend_flask_project/ .

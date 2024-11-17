@@ -1,12 +1,17 @@
-FROM python:3.10.7-alpine
+FROM python:3.10-slim
 
 WORKDIR /app
 
-COPY new_requirements.txt .
-#COPY requirements.txt .
+# COPY new_requirements.txt .
+COPY requirements.txt .
 
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r new_requirements.txt
+RUN pip install --no-cache-dir \
+    numpy \
+    scikit-learn \
+    joblib \
+    tensorflow
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY backend_flask_project/ .
 

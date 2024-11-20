@@ -48,7 +48,7 @@ def process_data():
             matches = set(mac_addresses).intersection(db_mac_addresses)
             if len(matches) >= 4:
                 matching_rows.append(row)
-                matching_mac_addresses = db_mac_addresses  # ordering/sortingg
+                matching_mac_addresses = db_mac_addresses  # ordering/sorting
                 room_id = row.room_id
                 ordered_rssi = []
                 for mac in matching_mac_addresses:
@@ -84,12 +84,7 @@ def process_data():
 
         # success
         return jsonify({
-            "message": "Data successfully inserted",
-            "data": {
-                "student_id": student_id,
-                "room_id": room_id,
-                # "position": predicted_position
-            }
+            "message": "Data successfully inserted"
         }), 201
 
     except Exception as e:
